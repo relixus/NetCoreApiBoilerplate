@@ -25,7 +25,7 @@ namespace NetCoreApiBoilerplate.Application.Auth
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim("Id", Guid.NewGuid().ToString()),
+                    new Claim("Id", user.Id.ToString()),
                     new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Email, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti,

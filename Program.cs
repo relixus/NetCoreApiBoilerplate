@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using NetCoreApiBoilerplate.Application.Auth;
 using NetCoreApiBoilerplate.Areas.Auth.Models;
 using NetCoreApiBoilerplate.Context;
+using NetCoreApiBoilerplate.Middlewares;
 using System.Text;
 
 namespace NetCoreApiBoilerplate
@@ -23,7 +24,10 @@ namespace NetCoreApiBoilerplate
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(authconstr));
-
+            //builder.Services.AddDbContextFactory<UserContext>(options =>
+            //{
+            //    options.UseSqlServer(authconstr);
+            //});
 
             builder.Services
             .AddIdentity<ApiUser, IdentityRole>(options =>
@@ -122,6 +126,8 @@ namespace NetCoreApiBoilerplate
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.UseMiddleware<CustomAuthMiddleware>();
 
             app.Run();
         }
