@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreApiBoilerplate.Areas.Auth.Models;
+using NetCoreApiBoilerplate.Areas.Auth.Services;
 
 namespace NetCoreApiBoilerplate.Application.Auth
 {

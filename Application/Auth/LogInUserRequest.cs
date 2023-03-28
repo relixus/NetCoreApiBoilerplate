@@ -3,6 +3,7 @@ using NetCoreApiBoilerplate.Application.Samples;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using NetCoreApiBoilerplate.Areas.Auth.Models;
+using NetCoreApiBoilerplate.Areas.Auth.Services;
 
 namespace NetCoreApiBoilerplate.Application.Auth
 {

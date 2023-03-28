@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace NetCoreApiBoilerplate.Application.Auth
+namespace NetCoreApiBoilerplate.Areas.Auth.Services
 {
     public class TokenService
     {

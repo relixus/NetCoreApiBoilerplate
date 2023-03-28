@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NetCoreApiBoilerplate.Application.Auth;
 using NetCoreApiBoilerplate.Areas.Auth.Models;
+using NetCoreApiBoilerplate.Areas.Auth.Services;
+using NetCoreApiBoilerplate.Areas.Common.Services;
 using NetCoreApiBoilerplate.Context;
 using NetCoreApiBoilerplate.Middlewares;
 using System.Text;
@@ -56,6 +57,7 @@ namespace NetCoreApiBoilerplate
             });
 
             builder.Services.AddTransient<TokenService>();
+            builder.Services.AddTransient<IEmailService, EmailService>();
 
             builder.Services.AddAuthentication(options =>
             {
