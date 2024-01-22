@@ -31,7 +31,7 @@ namespace NetCoreApiBoilerplate.Areas.Auth.Services
                     new Claim(JwtRegisteredClaimNames.Jti,
                     Guid.NewGuid().ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddMinutes(5),
                 Issuer = issuer,
                 Audience = audience,
                 SigningCredentials = new SigningCredentials

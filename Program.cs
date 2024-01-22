@@ -8,6 +8,7 @@ using NetCoreApiBoilerplate.Areas.Auth.Services;
 using NetCoreApiBoilerplate.Areas.Common.Services;
 using NetCoreApiBoilerplate.Context;
 using NetCoreApiBoilerplate.Middlewares;
+using NetCoreApiBoilerplate.Repository;
 using System.Text;
 
 namespace NetCoreApiBoilerplate
@@ -18,6 +19,8 @@ namespace NetCoreApiBoilerplate
         {
             var builder = WebApplication.CreateBuilder(args);
             var authconstr = builder.Configuration.GetConnectionString("Auth") ?? throw new InvalidOperationException();
+            var appconstr = builder.Configuration.GetConnectionString("App") ?? throw new InvalidOperationException();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -25,6 +28,7 @@ namespace NetCoreApiBoilerplate
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(authconstr));
+            builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(appconstr));
             //builder.Services.AddDbContextFactory<UserContext>(options =>
             //{
             //    options.UseSqlServer(authconstr);
@@ -57,6 +61,7 @@ namespace NetCoreApiBoilerplate
             });
 
             builder.Services.AddTransient<TokenService>();
+            builder.Services.AddTransient<ApplicationRepository>();
             builder.Services.AddTransient<IEmailService, EmailService>();
 
             builder.Services.AddAuthentication(options =>

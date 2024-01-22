@@ -7,7 +7,7 @@ namespace NetCoreApiBoilerplate.Context
 {
     public class UserContext :IdentityUserContext<ApiUser>
     {
-        public UserContext(DbContextOptions options) : base(options) { }
+        public UserContext(DbContextOptions<UserContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
