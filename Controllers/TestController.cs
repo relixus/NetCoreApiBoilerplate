@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using NetCoreApiBoilerplate;
 using NetCoreApiBoilerplate.Areas.Common.Models;
-using NetCoreApiBoilerplate.Areas.Common.Services;
-using NetCoreApiBoilerplate.Repository;
+using NetCoreApiBoilerplate.Areas;
+using NetCoreApiBoilerplate.BLL.Areas.Common.Services;
 
 namespace DotnetApiBoilerplate.Controllers
 {
@@ -16,8 +16,8 @@ namespace DotnetApiBoilerplate.Controllers
     {
         private readonly ILogger<TestController> _logger;
         private readonly IEmailService _emailService;
-        private readonly ApplicationRepository repository;
-        public TestController(ILogger<TestController> logger, IEmailService emailService, ApplicationRepository repository)
+        private readonly UnitOfWork repository;
+        public TestController(ILogger<TestController> logger, IEmailService emailService, UnitOfWork repository)
         {
             _logger = logger;
             _emailService = emailService;

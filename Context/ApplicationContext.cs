@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NetCoreApiBoilerplate.BLL.Areas.Common.Models;
+using NetCoreApiBoilerplate.BLL.Areas.Example.Models;
 using NetCoreApiBoilerplate.Context.Extensions;
-using NetCoreApiBoilerplate.Context.Models;
 
 namespace NetCoreApiBoilerplate.Context
 {

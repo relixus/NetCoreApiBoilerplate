@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NetCoreApiBoilerplate.Areas.Auth.Models;
-using NetCoreApiBoilerplate.Areas.Auth.Services;
-using NetCoreApiBoilerplate.Areas.Common.Services;
+using NetCoreApiBoilerplate.BLL.Areas.Auth.Models;
 using NetCoreApiBoilerplate.Context;
 using NetCoreApiBoilerplate.Middlewares;
-using NetCoreApiBoilerplate.Repository;
+using NetCoreApiBoilerplate.Middlewares.CustomAuthorization;
+using NetCoreApiBoilerplate.Areas;
 using System.Text;
+using NetCoreApiBoilerplate.BLL.Areas.Common.Services;
+using NetCoreApiBoilerplate.BLL.Areas.Auth.Services;
 
 namespace NetCoreApiBoilerplate
 {
@@ -27,6 +28,10 @@ namespace NetCoreApiBoilerplate
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddRouting(options => {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+            });
             builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(authconstr));
             builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(appconstr));
             //builder.Services.AddDbContextFactory<UserContext>(options =>
@@ -61,7 +66,7 @@ namespace NetCoreApiBoilerplate
             });
 
             builder.Services.AddTransient<TokenService>();
-            builder.Services.AddTransient<ApplicationRepository>();
+            builder.Services.AddTransient<UnitOfWork>();
             builder.Services.AddTransient<IEmailService, EmailService>();
 
             builder.Services.AddAuthentication(options =>
@@ -134,7 +139,7 @@ namespace NetCoreApiBoilerplate
 
             app.MapControllers();
 
-            app.UseMiddleware<CustomAuthMiddleware>();
+            app.UseMiddleware<ClaimsCheckingMiddleware>();
 
             app.Run();
         }

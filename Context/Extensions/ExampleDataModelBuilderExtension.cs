@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NetCoreApiBoilerplate.Context.Models;
 
 namespace NetCoreApiBoilerplate.Context.Extensions
 {
